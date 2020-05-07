@@ -2,11 +2,18 @@
 
 include "connect.php";
 
-	$user=$_POST["username"];
-	$pass=$_POST["password"];
+				//real escapes
+$user = mysqli_real_escape_string($conn,$_POST["username"]); 
+$pass = mysqli_real_escape_string($conn,$_POST["password"]); 
+	
 
-$query = "SELECT * FROM users WHERE username = '$user' AND password = '$pass'" ;
-$result = mysqli_query($conn,$query);
+
+// prepare and bind
+$stmt = $conn->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
+$stmt->bind_param("ss", $user,$pass);
+$stmt->execute();
+
+$result = $stmt->get_result();
 
 
 ?>
@@ -21,10 +28,10 @@ $result = mysqli_query($conn,$query);
 		A {
 		text-decoration: none;
 	width: 100%;
-	padding: 10px 160px;
+	
 	border-radius: 20px;
 	font-size: 22px;
-	margin: 10px 0;
+	margin: 10px 10px;
 	border: none;
 	outline: none;
 	cursor: pointer;
@@ -39,6 +46,15 @@ $result = mysqli_query($conn,$query);
 
 
 	} 
+
+	#start_test{
+		padding: 10px 160px;
+	}
+
+
+	 #create_test{
+		padding: 10px 146px;
+	}
 
 
 </STYLE>
@@ -70,7 +86,10 @@ if (mysqli_num_rows($result) == 1) {
 
 								
 				<br><br>
-				<center><a href="maintest.php" >Start Test</a></center>
+				<center><a href="maintest.php" id='start_test' >Start Test</a></center>
+				<br><br>
+				<center><a href="working.html" id='create_test' >Create Test</a></center>
+
 			
 			
 </div>

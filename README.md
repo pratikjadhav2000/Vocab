@@ -5,7 +5,7 @@ This mini project is in development process and is not yet ready.
 
 # Installation & Implementation:
 
-1. Install Xampp on your operating system.
+1.Install Xampp on your operating system.
 
 2.Extract the the downloaded files under xampp/htdocs (generally C:\xampp\htdocs in windows,If you are using linux google for htdocs path linux)
 
@@ -28,7 +28,7 @@ Note : Before starting the test,You will need to setup the Database through Xamp
 
 Create new database named :  'vocab'
 
-Select the vocab database, and click on import.And import the following file in extracted folder:
+Select the vocab database, and click on import.And import the following file from extracted folder:
 
 
 vocab.sql

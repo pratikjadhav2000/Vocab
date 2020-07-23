@@ -1,5 +1,7 @@
 <?php
 
+if (isset($_POST['LogInButton']) || isset($_GET['createdtest']) ) {
+
 include "connect.php";
 
 				//real escapes
@@ -8,20 +10,36 @@ $pass = mysqli_real_escape_string($conn,$_POST["password"]);
 	
 
 
-// prepare and bind
-$stmt = $conn->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
-$stmt->bind_param("ss", $user,$pass);
-$stmt->execute();
+		// prepare and bind
+		
+		$query="SELECT * FROM users WHERE username = ? ";
 
-$result = $stmt->get_result();
+		if (!($stmt = $conn->prepare($query))) {
+
+  		//echo("Error description: " . $mysqli -> error);
+		header("Location: loginmain.php?error=sqlerrorloginquery");
+		exit();
+		}
+		else{
+			 	// prepare and bind
+
+		$stmt->bind_param("s", $user);
+		$stmt->execute();
+		$result = $stmt->get_result();
+		$row = $result->fetch_assoc();
+
+		
+			}
 
 
 ?>
+
 
 <!DOCTYPE html>
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/homeimage.css">
 	<title>Welcome home!</title>
 	<STYLE>
 
@@ -48,12 +66,16 @@ $result = $stmt->get_result();
 	} 
 
 	#start_test{
-		padding: 10px 160px;
+		/* padding: 10px 160px; */ 
+		font-size: 20px;
+		width: 70%;
 	}
 
 
 	 #create_test{
-		padding: 10px 146px;
+		/* padding: 10px 146px;  */
+		font-size: 20px;
+		width: 70%;
 	}
 
 
@@ -68,27 +90,32 @@ $result = $stmt->get_result();
 		<?php
 
 
-if (mysqli_num_rows($result) == 1) {
+if (mysqli_num_rows($result) == 1 && password_verify($pass,$row["password"]) && strcmp($user, $row["username"])== 0 ) {
 
-	$row = $result->fetch_assoc();
+	
 	
 	echo "Welcome ".$row["firstname"];
-	
+	$userid=$row["user_id"];
 }
  else {
 //Fail
-	echo "Wrong username or password!";
-	return ;
+	header("Location: loginmain.php?err=username or password wrong&username=".$_POST["username"]);
+	exit();
 }
+
 
 ?>
 	</h1>
 
-								
+						
 				<br><br>
-				<center><a href="maintest.php" id='start_test' >Start Test</a></center>
-				<br><br>
-				<center><a href="working.html" id='create_test' >Create Test</a></center>
+				<center><form action="mytests.php?<?php echo "username=".$user."&userid=".$userid; ?>" method="post">
+					<input type="submit" id='start_test' class="loginbutton" name="StartTest" value="Start Test">
+				</form></center>
+				
+				<center><form action="testname.php?<?php echo "username=".$user."&userid=".$userid; ?>" method="post">
+					<input type="submit" id='create_test' class="loginbutton" name="CreateTest" value="Create Test">
+				</form></center>
 
 			
 			
@@ -98,3 +125,15 @@ if (mysqli_num_rows($result) == 1) {
 
 </body>
 </html>
+
+<?php 
+
+
+}
+else{
+	header("Location: loginmain.php?error=unknownacess");
+exit();
+}
+
+
+?>

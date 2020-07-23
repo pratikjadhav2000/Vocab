@@ -1,18 +1,55 @@
 <?php
 
-include "test.php";
+if(isset($_GET['username']) && isset($_GET['userid']) && isset($_GET['testname']) ){ 
+ 	$username=$_GET['username']; 
+ 	 $userid=$_GET['userid']; 
+ 	 $testname=$_GET['testname'];
+}
+else{
+	header("Location: loginmain.php?error=unknownacess");
+exit();
+	
+}
+
+include "tests.php";
+
+$tablename=mysqli_real_escape_string($conn_test,$userid."_".$testname);
+
+//fetch the questions from tablename
+
+$query="select * from ".$tablename." order by question_id";
+
+			if (!($stmt = $conn_test->prepare($query))) {
+				 echo("Error description: stmtprepare" . $conn_test -> error);
+			//header("Location: signupmain.php?error=sqlerrorusernamequery");
+			exit();
+
+			}
+			else{
+				
+				//$stmt->bind_param("s",$tablename);
+				
+				if(!$stmt->execute()){
+						echo("Error description: stmtexecute " . $conn_test -> error);
+						exit();
+				}
+						//store the result variable here
+				$result = $stmt->get_result();
+
+	//header("Location: maintest.php?testname=".$testname."&userid=".$userid);
+				
+			}
 
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-<meta charset="UTF-8">
+	
 <style>
 
 div#test{ border:#000 1px solid; padding:40px 40px 40px 40px;
-font-size: 33px;
+font-size: 25px;
 margin-left: 5px;
 margin-right: 5px;
 margin-bottom: 10px; }
@@ -41,8 +78,8 @@ A {
 
 	input[type=radio] {
     border: 10px;
-    width: 2.5em;
-    height: 2.5em;
+    width: 1.8em;
+    height: 1.8em;
 
 }
 
@@ -52,8 +89,8 @@ A {
 .tp{
 	
 		text-decoration: none;
-	width: 75%;
-	padding: 40px 50px 40px 50px;
+	width: 30%;
+	padding: 15px 25px 15px 25px;
 	border-radius: 40px;
 
 	
@@ -99,12 +136,12 @@ button:hover{
 #timer{
 
   position: sticky;
-  top: 0;
+  top: 65px;
 		font-size: 50px;
 		float: right;
 	list-style-type: none;
 	margin-top: 10px;
-	margin-right: 70px;
+	margin-right: 7px;
 	background-color: #FFF;
 }
 
@@ -113,16 +150,49 @@ button:hover{
 	transform: scale(1.5);
 }
 
+.logoutbutton{
+	
+	width: 10%;
+	padding: 10px 10px;
+	border-radius: 20px;
+	font-size: 15px;
+	margin: 10px 0;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	transition: 0.6s ease;
+	background: lightgray;
+	float: right;
+	top: 0;
+	text-align: center;
 
+}
+
+.logoutbutton:hover{
+	background-color: green;
+	color: #fff;
+}
 
 </style>
+
+<script src="timer.js" ></script>
 
 </head>
 
 <body>
+	<header id="header" class="">
 
-<script src="timer.js" ></script>
-		
+				<form action="loginmain.php" method="post">
+					<input type="submit" class="logoutbutton" name="logout" value="LogOut">
+				</form>
+				<p class="logoutbutton"><?php echo $username ?></p><br><br>
+
+	</header><!-- /header -->
+
+
+</body>		
+
+<footer>
 
 <h2 id="timer"></h2>
 <h2 id="result"></h2>
@@ -142,29 +212,18 @@ var pos = 0, test, test_status, question, choice, choices, chA, chB, chC,chD, co
 
 var questions = [];
 var radio = [];
-var marked;
+var marked;	
+	
 //fill the questions array with fetching questions from the database
+ <?php
+ while( $row = $result->fetch_assoc() ){
+ 	?>
 
-//function to get question from the server
-// for now is having problem so witten manually
+questions.push([ " <?php echo $row["question"]; ?> "," <?php echo $row["option1"]; ?> ", " <?php echo $row["option2"]; ?> "," <?php echo $row["option3"]; ?> ", " <?php echo $row["option4"]; ?> ", " <?php echo $row["answer"]; ?> " ,"0"]);
+<?php
+}
+?>
 
-
-	
-	
-<?php getquestion(); ?> 
-questions.push([ " <?php echo $question; ?> "," <?php echo $option1; ?> ", " <?php echo $option2; ?> "," <?php echo $option3; ?> ", " <?php echo $option4; ?> ", " <?php echo $answer; ?> " ,"0"]);
-
-<?php getquestion(); ?> 
-questions.push([ " <?php echo $question; ?> "," <?php echo $option1; ?> ", " <?php echo $option2; ?> "," <?php echo $option3; ?> ", " <?php echo $option4; ?> ", " <?php echo $answer; ?> ","0" ]);
-
-<?php getquestion(); ?> 
-questions.push([ " <?php echo $question; ?> "," <?php echo $option1; ?> ", " <?php echo $option2; ?> "," <?php echo $option3; ?> ", " <?php echo $option4; ?> ", " <?php echo $answer; ?> ","0" ]);
-
-<?php getquestion(); ?> 
-questions.push([ " <?php echo $question; ?> "," <?php echo $option1; ?> ", " <?php echo $option2; ?> "," <?php echo $option3; ?> ", " <?php echo $option4; ?> ", " <?php echo $answer; ?> ","0"]);
-
-<?php getquestion(); ?> 
-questions.push([ " <?php echo $question; ?> "," <?php echo $option1; ?> ", " <?php echo $option2; ?> "," <?php echo $option3; ?> ", " <?php echo $option4; ?> ", " <?php echo $answer; ?> ","0" ]);
 
 for(var i=0;i<questions.length;i++){
 	radio.push("");
@@ -189,12 +248,6 @@ for(pos=0;pos<questions.length;pos++){
 	renderQuestion();
 	
 }
-
-function newtest(){
-	location.reload()
-}
-
-
 
 
 function checktest(){
@@ -236,7 +289,7 @@ function result(){
 		
 		pos=0;
 
-		end.innerHTML = "<br><br><center><button onclick='startagain()'>Start Again</button><button onclick='newtest()'>Give Another Test</button><a href='login.html' >LogOut</a><br><button onclick='reviewtest()'>Review test</button></center>";
+		end.innerHTML = "<br><br><center><button onclick='startagain()'>Start Again</button><a href='mytests.php?<?php echo "username=".$username."&userid=".$userid; ?>'>Give Another Test</a><button onclick='reviewtest()'>Review test</button></center>";
 
 
 		return false;
@@ -263,7 +316,7 @@ test = _("test");
 	}
 
 
-	_("test_status").innerHTML = "<br>Question "+(pos+1)+" of "+questions.length+"<br><br>";
+	_("test_status").innerHTML = "<br>"+" Question "+(pos+1)+" of "+questions.length+"<br>";
 	question = questions[pos][0];
 	chA = questions[pos][1];
 	chB = questions[pos][2];
@@ -428,5 +481,7 @@ function unhide(id){
 window.addEventListener("load", renderQuestion ,true);
 </script>
 
-</body>
+</footer>
+
+
 </html>

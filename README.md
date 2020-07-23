@@ -1,5 +1,5 @@
 # Vocab
-Online Quiz Application to increase vocabulory
+Online Quiz Application 
 
 This mini project is in development process and is not yet ready.
 

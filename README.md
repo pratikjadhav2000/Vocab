@@ -7,9 +7,9 @@ This mini project is in development process and is not yet ready.
 
 1.Install Xampp on your operating system.
 
-2.Extract the the downloaded files under xampp/htdocs (generally C:\xampp\htdocs in windows,If you are using linux google for htdocs path linux)
+2.Extract the the downloaded files under xampp/htdocs/folder_name_of_your_choice (generally C:\xampp\htdocs in windows,If you are using linux google for htdocs path linux)
 
-3.Open xamp control panel and start apache server and sql.
+3.Open Xampp control panel and start apache server and sql.
 
 4.Open your browser and type localhost/folder_name
 
@@ -27,6 +27,5 @@ Note : Before starting the test,You will need to setup the Database through Xamp
 
 Click on Import in the navigation menu.
 And import the following file from extracted folder:
-
 
 vocab.sql

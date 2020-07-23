@@ -25,10 +25,8 @@ Note : Before starting the test,You will need to setup the Database through Xamp
 
 2.It will redirect to PhpMyAdmin,then setup the Database with exact details below:
 
-
-Create new database named :  'vocab'
-
-Select the vocab database, and click on import.And import the following file from extracted folder:
+Click on Import in the navigation menu.
+And import the following file from extracted folder:
 
 
 vocab.sql

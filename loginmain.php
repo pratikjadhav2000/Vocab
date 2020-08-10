@@ -15,8 +15,8 @@ else{
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" type="text/css" href="css/homeimage.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="homeimage.css">
 	<title>Log in</title>
 	<style>
 		#err{

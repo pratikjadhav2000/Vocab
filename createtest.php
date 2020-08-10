@@ -18,7 +18,7 @@ else{
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
 	<title>Create test</title>
 	<style>
 		.create_test{

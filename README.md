@@ -13,7 +13,7 @@ This mini project is in development process and is not yet ready.
 
 4.Open your browser and type localhost/folder_name
 
-5.Done!Website will appear.If not plz let me know and I'll help you :)
+5.Done!Website will appear.If not please let me know and I'll help you :)
 
 
 Note : Before starting the test,You will need to setup the Database through Xampp-PhpMyAdmin

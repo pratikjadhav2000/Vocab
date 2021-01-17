@@ -24,7 +24,7 @@ $testname=$_POST['testname'];
 $tablename=mysqli_real_escape_string($conn_test,$userid."_".$testname);
 
 //check whether the tablename already exists in the database tests
-$query="show tables where Tables_in_tests=?";
+$query="show tables where Tables_in_slueatrx_vocab=?";
 
 			if (!($stmt = $conn_test->prepare($query))) {
 				 echo("Error description: " . $conn_test -> error);
@@ -50,7 +50,7 @@ $query="show tables where Tables_in_tests=?";
 			
 					// else create the table in the database
 
-$query="CREATE TABLE `tests`.`$tablename` ( `question_id` INT NOT NULL AUTO_INCREMENT , `question` TEXT NOT NULL , `answer` TEXT NOT NULL , `option1` TEXT NOT NULL , `option2` TEXT NOT NULL , `option3` TEXT NOT NULL , `option4` TEXT NOT NULL , PRIMARY KEY (`question_id`)) ENGINE = InnoDB;";
+$query="CREATE TABLE `slueatrx_vocab`.`$tablename` ( `question_id` INT NOT NULL AUTO_INCREMENT , `question` TEXT NOT NULL , `answer` TEXT NOT NULL , `option1` TEXT NOT NULL , `option2` TEXT NOT NULL , `option3` TEXT NOT NULL , `option4` TEXT NOT NULL , PRIMARY KEY (`question_id`)) ENGINE = InnoDB;";
 
 			if (!($stmt = $conn_test->prepare($query))) {
 				 echo("Error description: stmtprepare" . $conn_test -> error);

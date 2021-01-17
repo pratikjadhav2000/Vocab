@@ -72,7 +72,7 @@ else{
 					<input type="text" name="option2" value="" placeholder="Option2" class="inputbox"><br>
 					<input type="text" name="option3" value="" placeholder="Option3" class="inputbox"><br>
 					<input type="text" name="option4" value="" placeholder="Option4" class="inputbox" ><br>
-					<input type="submit" name="addquestion" value="Add Question" class="loginbutton" id='AddQuestion'>
+					<input type="submit" name="addquestion" value="Add this Question" class="loginbutton" id='AddQuestion'>
 					<input type="submit" name="done" value="Done" class="loginbutton" id='Done'>
 				</form>
 				

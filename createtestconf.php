@@ -145,7 +145,7 @@ $option3=mysqli_real_escape_string($conn_test,$_POST["option3"]);
 $option4=mysqli_real_escape_string($conn_test,$_POST["option4"]);
 
 
-$query="INSERT INTO $tablename (`question_id`, `question`, `answer`, `option1`, `option2`, `option3`, `option4`) VALUES (NULL,?,?,?,?,?,?)";
+$query="INSERT INTO `slueatrx_vocab`.`$tablename` (`question_id`, `question`, `answer`, `option1`, `option2`, `option3`, `option4`) VALUES (NULL,?,?,?,?,?,?)";
 
 			if (!($stmt = $conn_test->prepare($query))) {
 				 echo("Error description: " . $conn_test -> error);

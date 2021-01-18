@@ -17,7 +17,7 @@ $tablename=mysqli_real_escape_string($conn_test,$userid."_".$testname);
 
 //fetch the questions from tablename
 
-$query="select * from ".$tablename." order by question_id";
+$query="select * from `slueatrx_vocab`.`$tablename` order by question_id";
 
 			if (!($stmt = $conn_test->prepare($query))) {
 				 echo("Error description: stmtprepare" . $conn_test -> error);

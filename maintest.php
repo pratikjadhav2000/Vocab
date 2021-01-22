@@ -13,14 +13,14 @@ exit();
 
 include "connect.php";
 
-$tablename=mysqli_real_escape_string($conn_test,$userid."_".$testname);
+$tablename=mysqli_real_escape_string($conn,$userid."_".$testname);
 
 //fetch the questions from tablename
 
 $query="select * from `slueatrx_vocab`.`$tablename` order by question_id";
 
-			if (!($stmt = $conn_test->prepare($query))) {
-				 echo("Error description: stmtprepare" . $conn_test -> error);
+			if (!($stmt = $conn->prepare($query))) {
+				 echo("Error description: stmtprepare" . $conn -> error);
 			//header("Location: signupmain.php?error=sqlerrorusernamequery");
 			exit();
 
@@ -30,7 +30,7 @@ $query="select * from `slueatrx_vocab`.`$tablename` order by question_id";
 				//$stmt->bind_param("s",$tablename);
 				
 				if(!$stmt->execute()){
-						echo("Error description: stmtexecute " . $conn_test -> error);
+						echo("Error description: stmtexecute " . $conn -> error);
 						exit();
 				}
 						//store the result variable here

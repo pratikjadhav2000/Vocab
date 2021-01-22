@@ -20,13 +20,13 @@ exit();
 //$tablename= userid + testname input by user
 														
 $testname=$_POST['testname'];
-$tablename=mysqli_real_escape_string($conn_test,$userid."_".$testname);
+$tablename=mysqli_real_escape_string($conn,$userid."_".$testname);
 
 //check whether the tablename already exists in the database tests
 $query="show tables where Tables_in_slueatrx_vocab=?";
 
-			if (!($stmt = $conn_test->prepare($query))) {
-				 echo("Error description: " . $conn_test -> error);
+			if (!($stmt = $conn ->prepare($query))) {
+				 echo("Error description: " . $conn -> error);
 			//header("Location: signupmain.php?error=sqlerrorusernamequery");
 			exit();
 
@@ -37,7 +37,7 @@ $query="show tables where Tables_in_slueatrx_vocab=?";
 				//$stmt->execute();
 				
 				if(!$stmt->execute()){
-						echo("Error description: " . $conn_test -> error);
+						echo("Error description: " . $conn  -> error);
 						exit();
 						}
 				$result = $stmt->get_result();
@@ -51,8 +51,8 @@ $query="show tables where Tables_in_slueatrx_vocab=?";
 
 $query="CREATE TABLE `slueatrx_vocab`.`$tablename` ( `question_id` INT NOT NULL AUTO_INCREMENT , `question` TEXT NOT NULL , `answer` TEXT NOT NULL , `option1` TEXT NOT NULL , `option2` TEXT NOT NULL , `option3` TEXT NOT NULL , `option4` TEXT NOT NULL , PRIMARY KEY (`question_id`)) ENGINE = InnoDB;";
 
-			if (!($stmt = $conn_test->prepare($query))) {
-				 echo("Error description: stmtprepare" . $conn_test -> error);
+			if (!($stmt = $conn ->prepare($query))) {
+				 echo("Error description: stmtprepare" . $conn  -> error);
 			//header("Location: signupmain.php?error=sqlerrorusernamequery");
 			exit();
 
@@ -62,7 +62,7 @@ $query="CREATE TABLE `slueatrx_vocab`.`$tablename` ( `question_id` INT NOT NULL 
 				//$stmt->execute();
 				
 				if(!$stmt->execute()){
-						echo("Error description: stmtexecute " . $conn_test -> error);
+						echo("Error description: stmtexecute " . $conn  -> error);
 						exit();
 				}
 						
@@ -75,8 +75,8 @@ $query="CREATE TABLE `slueatrx_vocab`.`$tablename` ( `question_id` INT NOT NULL 
 
 $query="INSERT INTO `master` (`test_id`, `table_name`, `test_name`, `user_id`) VALUES (NULL,?,?,?)";
 
-			if (!($stmt = $conn_test->prepare($query))) {
-				 echo("Error description: stmtprepare" . $conn_test -> error);
+			if (!($stmt = $conn ->prepare($query))) {
+				 echo("Error description: stmtprepare" . $conn  -> error);
 			//header("Location: signupmain.php?error=sqlerrorusernamequery");
 			exit();
 
@@ -86,7 +86,7 @@ $query="INSERT INTO `master` (`test_id`, `table_name`, `test_name`, `user_id`) V
 				//$stmt->execute();
 				$stmt->bind_param("ssi",$tablename,$testname,$userid);
 				if(!$stmt->execute()){
-						echo("Error description: stmtexecute " . $conn_test -> error);
+						echo("Error description: stmtexecute " . $conn  -> error);
 						exit();
 				}
 						
@@ -132,22 +132,22 @@ exit();
 	//$tablename= userid + testname input by user
 														
 
-$tablename=mysqli_real_escape_string($conn_test,$userid."_".$testname);
+$tablename=mysqli_real_escape_string($conn ,$userid."_".$testname);
 
 	//insert question into the database
 
-$question=mysqli_real_escape_string($conn_test,$_POST["question"]);
-$answer=mysqli_real_escape_string($conn_test,$_POST["answer"]);
-$option1=mysqli_real_escape_string($conn_test,$_POST["option1"]);
-$option2=mysqli_real_escape_string($conn_test,$_POST["option2"]);
-$option3=mysqli_real_escape_string($conn_test,$_POST["option3"]);
-$option4=mysqli_real_escape_string($conn_test,$_POST["option4"]);
+$question=mysqli_real_escape_string($conn ,$_POST["question"]);
+$answer=mysqli_real_escape_string($conn ,$_POST["answer"]);
+$option1=mysqli_real_escape_string($conn ,$_POST["option1"]);
+$option2=mysqli_real_escape_string($conn ,$_POST["option2"]);
+$option3=mysqli_real_escape_string($conn ,$_POST["option3"]);
+$option4=mysqli_real_escape_string($conn ,$_POST["option4"]);
 
 
 $query="INSERT INTO `slueatrx_vocab`.`$tablename` (`question_id`, `question`, `answer`, `option1`, `option2`, `option3`, `option4`) VALUES (NULL,?,?,?,?,?,?)";
 
-			if (!($stmt = $conn_test->prepare($query))) {
-				 echo("Error description: " . $conn_test -> error);
+			if (!($stmt = $conn ->prepare($query))) {
+				 echo("Error description: " . $conn  -> error);
 			//header("Location: signupmain.php?error=sqlerrorusernamequery");
 			exit();
 

@@ -119,8 +119,8 @@ include "connect.php"
 
 			$query="select * from master where user_id=?";
 
-			if (!($stmt = $conn_test->prepare($query))) {
-				 echo("Error description: stmtprepare" . $conn_test -> error);
+			if (!($stmt = $conn->prepare($query))) {
+				 echo("Error description: stmtprepare" . $conn -> error);
 			//header("Location: signupmain.php?error=sqlerrorusernamequery");
 			exit();
 
@@ -130,7 +130,7 @@ include "connect.php"
 				$stmt->bind_param("i",$userid);
 				
 				if(!$stmt->execute()){
-						echo("Error description: stmtexecute " . $conn_test -> error);
+						echo("Error description: stmtexecute " . $conn -> error);
 						exit();
 				}
 						//store the result variable here

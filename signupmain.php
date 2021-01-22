@@ -36,7 +36,8 @@
 					<input type="password" name="vpassword" value="" placeholder="Verify Password" class="inputbox" ><br><br>
 					<input type="submit" name="SignUpButton" value="Sign Up" class="loginbutton">
 				</form>
-				
+				<h3>OR</h3>
+				<a href="loginmain.php">Log In</a>
 			</div>
 		</header>
 			

@@ -12,7 +12,7 @@ else{
 
 }
 
-include "tests.php"
+include "connect.php"
 
   ?>
 

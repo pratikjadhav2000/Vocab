@@ -2,7 +2,6 @@
 
 
 include "connect.php";
-include "tests.php";
 
 
 

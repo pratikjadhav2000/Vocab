@@ -11,7 +11,7 @@ exit();
 	
 }
 
-include "tests.php";
+include "connect.php";
 
 $tablename=mysqli_real_escape_string($conn_test,$userid."_".$testname);
 
